@@ -6,7 +6,9 @@
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -18,6 +20,31 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
+  font-family: Roboto Condensed, sans-serif;
+}
+
+main {
+  width: 450px;
+  min-height: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  box-sizing: border-box;
+  position: relative;
+  top: 60px;
+  text-align: start;
+  padding: 40px 2em 0 2em;
+}
+
+.row:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+
+.clearfix::after {
+  display: block;
+  content: "";
+  clear: both;
 }
 
 /*
