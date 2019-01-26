@@ -93,17 +93,60 @@ $(document).ready(function() {
   }
 
   renderTweets(data);
-});
 
-const request = (options, cb) => {
-  $.ajax(options)
-    .done(response => {
-      cb(response);
-    })
-    .fail(err => {
-      console.log("Error: ", err);
-    })
-    .always(() => {
-      console.log("Request completed.");
-    });
-};
+  const request = (options, cb) => {
+    $.ajax(options)
+      .done(response => {
+        cb(response);
+      })
+      .fail(err => {
+        console.log("Error: ", err);
+      })
+      .always(() => {
+        console.log("Request completed.");
+      });
+  };
+
+  //format for new tweets
+  const createAddTweetFrm = () => {
+    return {
+      user: {
+        name: "text",
+        avatars: {},
+        handle: "text"
+      },
+      content: {
+        text: "text"
+      },
+      created_at: "date"
+    };
+  };
+
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    const addTweetFrm = createAddTweetFrm();
+    console.log("form submit");
+
+    //extracting the tweet from the textarea
+    const tweetContent = $("textarea").val();
+    console.log(tweetContent);
+
+    //request tweet properties
+    const options = {
+      type: "POST",
+      url: "/tweets",
+      data: { text: tweetContent }
+    };
+
+    $.ajax(options)
+      .done(response => {
+        console.log(response);
+      })
+      .fail(err => {
+        console.log("Error: ", err);
+      })
+      .always(() => {
+        console.log("Request completed.");
+      });
+  });
+});
