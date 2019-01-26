@@ -6,64 +6,6 @@
 $(document).ready(function() {
   const ROOT_URL = "http://localhost:8080";
 
-  const data = [
-    {
-      user: {
-        name: "Newton",
-        avatars: {
-          small:
-            "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-          regular:
-            "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-          large:
-            "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-        },
-        handle: "@SirIsaac"
-      },
-      content: {
-        text:
-          "If I have seen further it is by standing on the shoulders of giants"
-      },
-      created_at: 1461116232227
-    },
-    {
-      user: {
-        name: "Descartes",
-        avatars: {
-          small:
-            "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-          regular:
-            "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-          large:
-            "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-        },
-        handle: "@rd"
-      },
-      content: {
-        text: "Je pense , donc je suis"
-      },
-      created_at: 1461113959088
-    },
-    {
-      user: {
-        name: "Johann von Goethe",
-        avatars: {
-          small:
-            "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-          regular:
-            "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-          large:
-            "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-        },
-        handle: "@johann49"
-      },
-      content: {
-        text: "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-      },
-      created_at: 1461113796368
-    }
-  ];
-
   //building blocks to create new element in HTML
   function createTweetElement(tweetData) {
     let newTweet = $("<article>").addClass("tweet-header");
@@ -91,8 +33,6 @@ $(document).ready(function() {
       $("#tweets-container").append($tweet);
     }
   }
-
-  renderTweets(data);
 
   const request = (options, cb) => {
     $.ajax(options)
@@ -122,9 +62,28 @@ $(document).ready(function() {
     };
   };
 
+  const loadTweets = {
+    method: "GET",
+    datatype: "json",
+    url: "/tweets"
+  };
+  //AJAX get request
+  $.ajax(loadTweets)
+    .done(response => {
+      renderTweets(response);
+      console.log("response completed:", response);
+    })
+    .fail(err => {
+      console.log("Error: ", err);
+    })
+    .always(() => {
+      console.log("Request completed.");
+    });
+
+  //event traget for submitted tweet
   $("form").on("submit", function(event) {
     event.preventDefault();
-    const addTweetFrm = createAddTweetFrm();
+    // const addTweetFrm = createAddTweetFrm();
     console.log("form submit");
 
     //extracting the tweet from the textarea
@@ -137,9 +96,11 @@ $(document).ready(function() {
       url: "/tweets",
       data: { text: tweetContent }
     };
-
+    //AJAX post request
     $.ajax(options)
       .done(response => {
+        let $tweet = createTweetElement(response);
+        $("#tweets-container").prepend($tweet);
         console.log(response);
       })
       .fail(err => {
