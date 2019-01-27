@@ -4,6 +4,7 @@ section.new-tweet {
   border: 1px darkgrey solid;
   border-radius: 0.6em;
   background-color: #eee;
+  opacity: 0.9;
 }
 .new-tweet h2 {
   margin-bottom: 0.5em;
