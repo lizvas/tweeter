@@ -118,4 +118,11 @@ $(document).ready(function() {
         console.log("Request completed.");
       });
   });
+
+  $(".btn-compose").click(function() {
+    $(".new-tweet").slideToggle(function() {
+      $(".new-tweet").focus();
+    });
+  });
+  loadTweets();
 });
