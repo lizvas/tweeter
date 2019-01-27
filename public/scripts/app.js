@@ -82,13 +82,21 @@ $(document).ready(function() {
 
   //event traget for submitted tweet
   $("form").on("submit", function(event) {
+    if ($("textarea").val() == "") {
+      alert("Please enter text");
+    } else if ($("textarea").val().length > 140) {
+      alert("Over the limit");
+      event.stopPropagation();
+      return false;
+    }
     event.preventDefault();
+
     // const addTweetFrm = createAddTweetFrm();
     console.log("form submit");
 
     //extracting the tweet from the textarea
     const tweetContent = $("textarea").val();
-    console.log(tweetContent);
+    // console.log(tweetContent);
 
     //request tweet properties
     const options = {
