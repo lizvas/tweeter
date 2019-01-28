@@ -48,6 +48,14 @@
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form class="clearfix" method="POST" action="/tweets">
+          <div class="alert" style="display:none">
+            <span
+              class="closebtn"
+              onclick="this.parentElement.style.display='none';"
+              >&times;</span
+            >
+            Invalid Entry
+          </div>
           <textarea
             name="text"
             placeholder="What are you humming about?"

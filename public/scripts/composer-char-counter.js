@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("span").on("keyup", function(event) {
+  $(".counter").keyup(function(event) {
     const max = 140;
     const tUp = $(this).val().length;
     const tDown = max - tUp;
@@ -13,5 +13,11 @@ $(document).ready(function() {
         .text(char)
         .css("color", "black");
     }
+  });
+
+  $(".btn-compose").click(function() {
+    $(".new-tweet").slideToggle(function() {
+      $(".new-tweet").focus();
+    });
   });
 });

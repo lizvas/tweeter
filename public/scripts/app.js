@@ -40,10 +40,10 @@ $(document).ready(function() {
         cb(response);
       })
       .fail(err => {
-        console.log("Error: ", err);
+        console.log("Ajax error: ", err);
       })
       .always(() => {
-        console.log("Request completed.");
+        console.log("Ajax request completed.");
       });
   };
 
@@ -71,21 +71,28 @@ $(document).ready(function() {
   $.ajax(loadTweets)
     .done(response => {
       renderTweets(response);
-      console.log("response completed:", response);
+      console.log("Get response completed:", response);
     })
     .fail(err => {
-      console.log("Error: ", err);
+      console.log("Get error: ", err);
     })
     .always(() => {
-      console.log("Request completed.");
+      console.log("Get Request completed.");
     });
 
   //event traget for submitted tweet
   $("form").on("submit", function(event) {
     if ($("textarea").val() == "") {
-      alert("Please enter text");
+      $(".alert").slideDown();
+      setTimeout(function() {
+        div.style.display = "none";
+      }, 30);
     } else if ($("textarea").val().length > 140) {
-      alert("Over the limit");
+      $(".alert").slideDown();
+      setTimeout(function() {
+        div.style.display = "none";
+      }, 30);
+
       event.stopPropagation();
       return false;
     }
@@ -109,20 +116,13 @@ $(document).ready(function() {
       .done(response => {
         let $tweet = createTweetElement(response);
         $("#tweets-container").prepend($tweet);
-        console.log(response);
+        console.log("Post Request: ", response);
       })
       .fail(err => {
-        console.log("Error: ", err);
+        console.log("Post error: ", err);
       })
       .always(() => {
-        console.log("Request completed.");
+        console.log("Post request completed.");
       });
   });
-
-  $(".btn-compose").click(function() {
-    $(".new-tweet").slideToggle(function() {
-      $(".new-tweet").focus();
-    });
-  });
-  loadTweets();
 });
