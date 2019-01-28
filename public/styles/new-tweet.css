@@ -6,6 +6,7 @@ section.new-tweet {
   background-color: #eee;
   opacity: 0.9;
 }
+
 .new-tweet h2 {
   margin-bottom: 0.5em;
   border-bottom: 1px solid darkslategrey;
@@ -23,6 +24,14 @@ section.new-tweet {
 }
 
 .alert {
+  padding: 20px;
+  background-color: red;
+  color: white;
+  margin-bottom: 15px;
+  opacity: 1;
+  transition: opacity 0.6s;
+}
+.alert_tooLong {
   padding: 20px;
   background-color: red;
   color: white;

@@ -84,15 +84,8 @@ $(document).ready(function() {
   $("form").on("submit", function(event) {
     if ($("textarea").val() == "") {
       $(".alert").slideDown();
-      setTimeout(function() {
-        div.style.display = "none";
-      }, 30);
     } else if ($("textarea").val().length > 140) {
-      $(".alert").slideDown();
-      setTimeout(function() {
-        div.style.display = "none";
-      }, 30);
-
+      $(".alert_tooLong").slideDown();
       event.stopPropagation();
       return false;
     }

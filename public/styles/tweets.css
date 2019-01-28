@@ -1,3 +1,7 @@
+.tweet-header:hover {
+  filter: brightness(98%);
+}
+
 .tweet-header header {
   display: flex;
   align-items: center;
@@ -44,8 +48,8 @@ article footer {
   color: black;
   background-color: white;
   border-bottom: darkgrey 1px solid;
-  border-bottom-right-radius: darkgrey 1px solid;
-  border-bottom-left-radius: darkgrey 1px solid;
+  border-bottom-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
   border-left: darkgrey 1px solid;
   border-right: darkgrey 1px solid;
   border-top: lightgrey 1px solid;

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".counter").keyup(function(event) {
+  $("textarea").keyup(function(event) {
     const max = 140;
     const tUp = $(this).val().length;
     const tDown = max - tUp;
